@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block title %}Course Details - {{ course.title }} - Menyarwanda{% endblock %}
+
+{% block content %}
+<!-- Course Header -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">{{ course.title }}</h1>
+                <div class="d-flex align-items-center mb-4">
+                    {% if course.id == 1 %}
+                        <span class="badge bg-primary me-2">Level 1</span>
+                    {% elif course.id == 2 %}
+                        <span class="badge bg-success me-2">Level 2</span>
+                    {% elif course.id == 3 %}
+                        <span class="badge bg-danger me-2">Level 3</span>
+                    {% else %}
+                        <span class="badge bg-secondary me-2">Specialized</span>
+                    {% endif %}
+                    <span class="text-muted">{{ course.get_total_modules }} modules</span>
+                </div>
+                <div class="hero-text mb-4">
+                    <p>{{ course.description }}</p>
+                    {% if not user.is_subscriber and not user.is_staff %}
+                        <div class="alert alert-info">
+                            <p><strong>Note:</strong> You can browse course content, but to access lessons, track progress, and take quizzes, you need to <a href="{% url 'subscription_page' %}" class="alert-link">subscribe to our premium service</a>.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Course Progress</h5>
+                        {% if user.is_authenticated and user.is_subscriber %}
+                            <!-- Progress bar would be dynamically generated based on user progress -->
+                            <div class="progress mb-3" style="height: 20px;">
+                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            </div>
+                            <p class="mb-0">You've completed 3 of 12 lessons</p>
+                        {% else %}
+                            <p class="mb-3">Subscribe to track your progress</p>
+                            <a href="{% url 'subscription_page' %}" class="btn btn-primary">Subscribe Now</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Course Modules -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Course Modules</h2>
+        
+        <div class="accordion" id="courseModules">
+            {% for module in modules %}
+                <div class="accordion-item mb-3 border">
+                    <h2 class="accordion-header" id="heading{{ module.id }}">
+                        <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ module.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="collapse{{ module.id }}">
+                            <div class="d-flex justify-content-between align-items-center w-100 me-3">
+                                <span>Module {{ module.order }}: {{ module.title }}</span>
+                                <span class="badge bg-primary rounded-pill">{{ module.lessons.count }} lessons</span>
+                            </div>
+                        </button>
+                    </h2>
+                    <div id="collapse{{ module.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ module.id }}" data-bs-parent="#courseModules">
+                        <div class="accordion-body">
+                            <p>{{ module.description }}</p>
+                            <div class="list-group mt-3">
+                                {% for lesson in module.lessons.all %}
+                                    <a href="{% url 'lesson_detail' lesson.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">{{ lesson.title }}</h6>
+                                            <small class="text-muted">Lesson {{ lesson.order }}</small>
+                                        </div>
+                                        {% if user.is_authenticated and user.is_subscriber %}
+                                            <!-- This would be dynamically generated based on user progress -->
+                                            <span class="badge bg-success rounded-pill">Completed</span>
+                                        {% endif %}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="mt-3">
+                                <a href="{% url 'module_detail' module.id %}" class="btn btn-outline-primary">Go to Module</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Course Features -->
+<section class="section-bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What You'll Learn</h2>
+            <p class="lead">Key skills and knowledge you'll gain from this course</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">🗣️</div>
+                        <h5 class="card-title mt-3">Speaking Skills</h5>
+                        <p class="card-text">Develop natural pronunciation and conversational fluency through guided practice and audio examples.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">📝</div>
+                        <h5 class="card-title mt-3">Grammar Foundations</h5>
+                        <p class="card-text">Master essential grammar structures through clear explanations and practical exercises.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">🧠</div>
+                        <h5 class="card-title mt-3">Vocabulary Building</h5>
+                        <p class="card-text">Expand your Kinyarwanda vocabulary with thematic word groups and memory techniques.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">👂</div>
+                        <h5 class="card-title mt-3">Listening Comprehension</h5>
+                        <p class="card-text">Train your ear to understand native speakers through varied audio materials.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">📚</div>
+                        <h5 class="card-title mt-3">Reading Skills</h5>
+                        <p class="card-text">Progress from simple texts to more complex materials as your proficiency grows.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">🎭</div>
+                        <h5 class="card-title mt-3">Cultural Context</h5>
+                        <p class="card-text">Learn language in its cultural context to understand nuances and appropriate usage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-4">Ready to Start Learning?</h2>
+                <p class="lead mb-4">Begin your journey to mastering Kinyarwanda with this comprehensive course.</p>
+                {% if user.is_authenticated %}
+                    {% if user.is_subscriber %}
+                        <a href="{% url 'module_detail' modules.first.id %}" class="btn btn-primary btn-lg cta-button">Start First Module</a>
+                    {% else %}
+                        <a href="{% url 'subscription_page' %}" class="btn btn-primary btn-lg cta-button">Subscribe Now</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg cta-button me-2">Sign Up</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg cta-button">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

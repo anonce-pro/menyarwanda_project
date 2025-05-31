@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+{% block title %}Subscribe - Menyarwanda{% endblock %}
+
+{% block content %}
+<!-- Subscription Header -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Join Our Premium Learning Experience</h1>
+                <div class="hero-text mb-4">
+                    <p>Unlock the full potential of Menyarwanda with our premium subscription. As a subscriber, you'll gain access to all course content, track your progress, take interactive quizzes, and enjoy a personalized learning experience.</p>
+                    <p>Our comprehensive Kinyarwanda courses are designed to help you develop practical language skills while gaining insights into Rwandan culture, traditions, and daily life.</p>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-0">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Learning Kinyarwanda" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Subscription Benefits -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Premium Subscription Benefits</h2>
+            <p class="lead">Everything you need to master Kinyarwanda</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">🔓</div>
+                        <h5 class="card-title mt-3">Full Course Access</h5>
+                        <p class="card-text">Gain unlimited access to all lessons, modules, and courses in our Kinyarwanda learning program.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">📊</div>
+                        <h5 class="card-title mt-3">Progress Tracking</h5>
+                        <p class="card-text">Monitor your advancement with detailed statistics and completion percentages for each course.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">📝</div>
+                        <h5 class="card-title mt-3">Interactive Quizzes</h5>
+                        <p class="card-text">Test your knowledge with comprehensive quizzes and track your results over time.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">🔊</div>
+                        <h5 class="card-title mt-3">Audio Pronunciations</h5>
+                        <p class="card-text">Learn authentic pronunciation with native speaker audio recordings for all vocabulary and phrases.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">📚</div>
+                        <h5 class="card-title mt-3">Downloadable Resources</h5>
+                        <p class="card-text">Access vocabulary lists, grammar guides, and practice exercises to enhance your learning.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div style="font-size: 2.5rem; color: var(--primary-blue);">🌟</div>
+                        <h5 class="card-title mt-3">New Content Updates</h5>
+                        <p class="card-text">Receive access to all new courses and content as they are added to the platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Subscription Plans -->
+<section class="section-bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Choose Your Plan</h2>
+            <p class="lead">Select the subscription option that works best for you</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4 class="my-0 fw-bold">Monthly Plan</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title">$9.99<small class="text-muted fw-light">/month</small></h1>
+                        <ul class="list-unstyled mt-4 mb-4">
+                            <li class="mb-2">✅ Full course access</li>
+                            <li class="mb-2">✅ Progress tracking</li>
+                            <li class="mb-2">✅ Interactive quizzes</li>
+                            <li class="mb-2">✅ Audio pronunciations</li>
+                            <li class="mb-2">✅ Cancel anytime</li>
+                        </ul>
+                        <form method="post" action="{% url 'subscribe_user' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="plan" value="monthly">
+                            <button type="submit" class="btn btn-lg btn-primary w-100">Subscribe Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h4 class="my-0 fw-bold">Annual Plan</h4>
+                        <span class="badge bg-warning text-dark">Save 20%</span>
+                    </div>
+                    <div class="card-body text-center">
+                        <h1 class="card-title">$95.88<small class="text-muted fw-light">/year</small></h1>
+                        <p class="text-success">$7.99/month (billed annually)</p>
+                        <ul class="list-unstyled mt-4 mb-4">
+                            <li class="mb-2">✅ Full course access</li>
+                            <li class="mb-2">✅ Progress tracking</li>
+                            <li class="mb-2">✅ Interactive quizzes</li>
+                            <li class="mb-2">✅ Audio pronunciations</li>
+                            <li class="mb-2">✅ Downloadable resources</li>
+                            <li class="mb-2">✅ Priority support</li>
+                        </ul>
+                        <form method="post" action="{% url 'subscribe_user' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="plan" value="annual">
+                            <button type="submit" class="btn btn-lg btn-primary w-100">Subscribe Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <p class="text-muted">For demonstration purposes, clicking "Subscribe Now" will automatically activate your subscription without payment processing.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What Our Subscribers Say</h2>
+            <p class="lead">Join thousands of satisfied learners on their journey to mastering Kinyarwanda</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"The progress tracking feature has been a game-changer for my learning. Being able to see how far I've come keeps me motivated to continue. The quizzes are challenging but fair, and they really help reinforce what I've learned."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="ms-3">
+                                <h6 class="mb-0">Michael T.</h6>
+                                <small class="text-muted">Premium Subscriber</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"I've tried several language learning platforms, but Menyarwanda stands out for its cultural context. I'm not just learning words and phrases; I'm gaining insights into Rwandan culture, which makes the language come alive. Well worth the subscription!"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="ms-3">
+                                <h6 class="mb-0">Sophia K.</h6>
+                                <small class="text-muted">Premium Subscriber</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"As someone preparing to work in Rwanda, this platform has been invaluable. The structured approach to learning, combined with the ability to track my progress, has helped me develop practical language skills much faster than I expected."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="ms-3">
+                                <h6 class="mb-0">Robert J.</h6>
+                                <small class="text-muted">Premium Subscriber</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Frequently Asked Questions</h2>
+            <p class="lead">Find answers to common questions about our subscription</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="subscriptionFAQ">
+                    <div class="accordion-item mb-3 border">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Can I cancel my subscription at any time?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#subscriptionFAQ">
+                            <div class="accordion-body">
+                                Yes, you can cancel your subscription at any time. If you cancel, you'll continue to have access until the end of your current billing period.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item mb-3 border">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                What payment methods do you accept?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#subscriptionFAQ">
+                            <div class="accordion-body">
+                                We accept all major credit cards, PayPal, and mobile payment options. All transactions are secure and encrypted.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item mb-3 border">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Is there a free trial available?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#subscriptionFAQ">
+                            <div class="accordion-body">
+                                While we don't currently offer a free trial, you can browse course descriptions and preview some content before subscribing. We also offer a 30-day money-back guarantee if you're not satisfied with your subscription.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item mb-3 border">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Can I switch between subscription plans?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#subscriptionFAQ">
+                            <div class="accordion-body">
+                                Yes, you can upgrade or downgrade your subscription plan at any time. If you upgrade, the new rate will be prorated for the remainder of your billing cycle. If you downgrade, the new rate will take effect at the start of your next billing cycle.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item border">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                How often is new content added?
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#subscriptionFAQ">
+                            <div class="accordion-body">
+                                We regularly update our content and add new lessons, modules, and courses. As a subscriber, you'll automatically get access to all new content as it's released.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-4">Ready to Start Your Kinyarwanda Journey?</h2>
+                <p class="lead mb-4">Join our community of learners and begin your path to fluency today.</p>
+                <a href="#subscription-plans" class="btn btn-primary btn-lg cta-button">Subscribe Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

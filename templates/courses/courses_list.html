@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+
+{% block title %}Courses - Menyarwanda{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Kinyarwanda Language Courses</h1>
+                <div class="hero-text mb-4">
+                    <p>Welcome to our comprehensive Kinyarwanda language learning program. Our courses are designed to help you develop practical language skills while gaining insights into Rwandan culture, traditions, and daily life.</p>
+                    <p>Whether you're a complete beginner or looking to advance your existing knowledge, our structured modules provide a clear path to fluency. Each course includes interactive lessons, audio pronunciations, practical exercises, and cultural notes.</p>
+                    {% if not user.is_subscriber %}
+                        <p class="alert alert-info">To access full course content, track your progress, and take quizzes, please <a href="{% url 'subscription_page' %}" class="alert-link">subscribe to our premium service</a>.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-0">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Learning Kinyarwanda" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Courses Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Available Courses</h2>
+            <p class="lead">Choose the course that best fits your learning goals and current level</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Beginner Course -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0">Beginner Kinyarwanda</h4>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Level 1</span>
+                        <p>Start your journey into Kinyarwanda with this comprehensive introduction for complete beginners.</p>
+                        <h5>What you'll learn:</h5>
+                        <ul>
+                            <li>Basic greetings and introductions</li>
+                            <li>Essential vocabulary for everyday situations</li>
+                            <li>Simple sentence structures</li>
+                            <li>Numbers, colors, and common objects</li>
+                            <li>Basic pronunciation and intonation</li>
+                        </ul>
+                        <p><strong>6 modules</strong> • <strong>24 lessons</strong> • <strong>12 quizzes</strong></p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="{% url 'course_detail' 1 %}" class="btn btn-primary w-100">View Course</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Intermediate Course -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0">Intermediate Kinyarwanda</h4>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Level 2</span>
+                        <p>Build on your basic knowledge and develop more complex language skills for everyday conversations.</p>
+                        <h5>What you'll learn:</h5>
+                        <ul>
+                            <li>Expanded vocabulary for various contexts</li>
+                            <li>More complex grammar structures</li>
+                            <li>Past, present, and future tenses</li>
+                            <li>Conversational skills for common situations</li>
+                            <li>Cultural insights and expressions</li>
+                        </ul>
+                        <p><strong>8 modules</strong> • <strong>32 lessons</strong> • <strong>16 quizzes</strong></p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="{% url 'course_detail' 2 %}" class="btn btn-primary w-100">View Course</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Advanced Course -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="mb-0">Advanced Kinyarwanda</h4>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-danger mb-2">Level 3</span>
+                        <p>Refine your language skills and gain fluency with advanced topics and authentic materials.</p>
+                        <h5>What you'll learn:</h5>
+                        <ul>
+                            <li>Advanced grammar and complex structures</li>
+                            <li>Idiomatic expressions and proverbs</li>
+                            <li>Professional and academic vocabulary</li>
+                            <li>Cultural nuances and regional variations</li>
+                            <li>Reading and discussing authentic texts</li>
+                        </ul>
+                        <p><strong>10 modules</strong> • <strong>40 lessons</strong> • <strong>20 quizzes</strong></p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="{% url 'course_detail' 3 %}" class="btn btn-primary w-100">View Course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Special Courses Section -->
+<section class="section-bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Specialized Courses</h2>
+            <p class="lead">Focus on specific aspects of Kinyarwanda language and culture</p>
+        </div>
+        
+        <div class="row">
+            <!-- Business Kinyarwanda -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Kinyarwanda</h5>
+                        <span class="badge bg-secondary mb-2">Specialized</span>
+                        <p class="card-text">Learn vocabulary and expressions specific to business contexts, including meetings, negotiations, and professional correspondence. Ideal for those working or planning to work in Rwanda.</p>
+                        <p><strong>4 modules</strong> • <strong>16 lessons</strong> • <strong>8 quizzes</strong></p>
+                        <a href="{% url 'course_detail' 4 %}" class="btn btn-outline-primary">View Course</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kinyarwanda for Travelers -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Kinyarwanda for Travelers</h5>
+                        <span class="badge bg-secondary mb-2">Specialized</span>
+                        <p class="card-text">A practical course focused on essential phrases and vocabulary for travelers. Learn how to navigate transportation, accommodation, dining, shopping, and emergencies in Rwanda.</p>
+                        <p><strong>3 modules</strong> • <strong>12 lessons</strong> • <strong>6 quizzes</strong></p>
+                        <a href="{% url 'course_detail' 5 %}" class="btn btn-outline-primary">View Course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Learning Approach -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Our Learning Approach</h2>
+            <p class="lead">How we help you master Kinyarwanda effectively</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-3 mb-4 text-center">
+                <div style="font-size: 2.5rem; color: var(--primary-blue);">🎯</div>
+                <h5 class="mt-3">Structured Progression</h5>
+                <p>Clear learning path from basic to advanced concepts, with each lesson building on previous knowledge.</p>
+            </div>
+            
+            <div class="col-md-3 mb-4 text-center">
+                <div style="font-size: 2.5rem; color: var(--primary-blue);">🔊</div>
+                <h5 class="mt-3">Audio Integration</h5>
+                <p>Native speaker recordings help you master authentic pronunciation and intonation patterns.</p>
+            </div>
+            
+            <div class="col-md-3 mb-4 text-center">
+                <div style="font-size: 2.5rem; color: var(--primary-blue);">✅</div>
+                <h5 class="mt-3">Interactive Quizzes</h5>
+                <p>Regular assessments reinforce learning and help you track your progress through each module.</p>
+            </div>
+            
+            <div class="col-md-3 mb-4 text-center">
+                <div style="font-size: 2.5rem; color: var(--primary-blue);">🏆</div>
+                <h5 class="mt-3">Progress Tracking</h5>
+                <p>Monitor your advancement through courses with detailed statistics and completion percentages.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-4">Ready to Start Learning Kinyarwanda?</h2>
+                <p class="lead mb-4">Join our community of learners and begin your journey to fluency today.</p>
+                {% if user.is_authenticated %}
+                    {% if user.is_subscriber %}
+                        <a href="{% url 'course_detail' 1 %}" class="btn btn-primary btn-lg cta-button">Start Learning Now</a>
+                    {% else %}
+                        <a href="{% url 'subscription_page' %}" class="btn btn-primary btn-lg cta-button">Subscribe Now</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg cta-button me-2">Sign Up</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg cta-button">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

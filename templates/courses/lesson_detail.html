@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+
+{% block title %}Lesson: {{ lesson.title }} - Menyarwanda{% endblock %}
+
+{% block content %}
+<!-- Lesson Header -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'courses_list' %}">Courses</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'course_detail' lesson.module.course.id %}">{{ lesson.module.course.title }}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'module_detail' lesson.module.id %}">Module {{ lesson.module.order }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Lesson {{ lesson.order }}</li>
+                    </ol>
+                </nav>
+                <h1 class="display-4 fw-bold mb-3">{{ lesson.title }}</h1>
+                
+                <!-- Lesson Navigation -->
+                <div class="d-flex justify-content-between mb-4">
+                    {% if prev_lesson %}
+                        <a href="{% url 'lesson_detail' prev_lesson.id %}" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-left"></i> Previous Lesson
+                        </a>
+                    {% else %}
+                        <a href="{% url 'module_detail' lesson.module.id %}" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-left"></i> Back to Module
+                        </a>
+                    {% endif %}
+                    
+                    {% if next_lesson %}
+                        <a href="{% url 'lesson_detail' next_lesson.id %}" class="btn btn-outline-primary">
+                            Next Lesson <i class="bi bi-arrow-right"></i>
+                        </a>
+                    {% elif has_quiz %}
+                        <a href="{% url 'quiz_detail' lesson.quiz.id %}" class="btn btn-primary">
+                            Take Quiz <i class="bi bi-arrow-right"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Progress</h5>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3" style="font-size: 2rem; color: var(--primary-blue);">✅</div>
+                            <div>
+                                <h6 class="mb-0">Lesson Completed</h6>
+                                <small class="text-muted">This lesson will be marked as completed when you reach the end.</small>
+                            </div>
+                        </div>
+                        {% if has_quiz %}
+                            <div class="d-flex align-items-center">
+                                <div class="me-3" style="font-size: 2rem; color: var(--primary-blue);">📝</div>
+                                <div>
+                                    <h6 class="mb-0">Quiz Available</h6>
+                                    <small class="text-muted">Test your knowledge after completing this lesson.</small>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Lesson Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="lesson-content">
+                            {{ lesson.content|safe }}
+                            
+                            <!-- Sample content for demonstration -->
+                            {% if not lesson.content %}
+                                <h3>Introduction to Greetings in Kinyarwanda</h3>
+                                <p>Greetings are an essential part of Rwandan culture and are often more elaborate than in many Western cultures. Taking time to greet someone properly shows respect and establishes a positive connection.</p>
+                                
+                                <h4>Basic Greetings</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Kinyarwanda</th>
+                                                <th>Pronunciation</th>
+                                                <th>English</th>
+                                                <th>Usage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Muraho</td>
+                                                <td>moo-rah-ho</td>
+                                                <td>Hello</td>
+                                                <td>General greeting, can be used at any time of day</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mwaramutse</td>
+                                                <td>mwah-rah-moot-say</td>
+                                                <td>Good morning</td>
+                                                <td>Used in the morning until around noon</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mwiriwe</td>
+                                                <td>mwee-ree-way</td>
+                                                <td>Good afternoon/evening</td>
+                                                <td>Used from afternoon until evening</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <h4>Responding to Greetings</h4>
+                                <p>When someone greets you, you can respond with the same greeting. You can also add:</p>
+                                <ul>
+                                    <li><strong>Amakuru?</strong> (ah-mah-koo-roo) - How are you? / What's the news?</li>
+                                    <li><strong>Ni meza</strong> (nee may-zah) - I'm fine / It's good</li>
+                                </ul>
+                                
+                                <div class="alert alert-info">
+                                    <h5 class="alert-heading">Cultural Note</h5>
+                                    <p>In Rwanda, it's considered impolite to rush through greetings. Take your time and show genuine interest in the other person's well-being.</p>
+                                </div>
+                                
+                                <h4>Practice Dialogue</h4>
+                                <div class="card mb-4">
+                                    <div class="card-body bg-light">
+                                        <p><strong>Person A:</strong> Muraho! (Hello!)</p>
+                                        <p><strong>Person B:</strong> Muraho! Amakuru? (Hello! How are you?)</p>
+                                        <p><strong>Person A:</strong> Ni meza. Amakuru yawe? (I'm fine. How are you?)</p>
+                                        <p><strong>Person B:</strong> Ni meza cyane. (I'm very well.)</p>
+                                    </div>
+                                </div>
+                                
+                                <h4>Pronunciation Practice</h4>
+                                <p>Listen to the audio examples and practice your pronunciation:</p>
+                                <div class="d-flex flex-wrap gap-2 mb-4">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-play-fill"></i> Muraho
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-play-fill"></i> Mwaramutse
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-play-fill"></i> Mwiriwe
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-play-fill"></i> Amakuru
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-play-fill"></i> Ni meza
+                                    </button>
+                                </div>
+                                
+                                <h4>Practice Exercises</h4>
+                                <p>Complete these exercises to reinforce what you've learned:</p>
+                                <ol>
+                                    <li>What greeting would you use in the morning?</li>
+                                    <li>How would you ask someone how they are doing?</li>
+                                    <li>What is the appropriate response when someone asks "Amakuru?"</li>
+                                </ol>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lesson Complete Button -->
+                <div class="text-center mb-4">
+                    {% if has_quiz %}
+                        <a href="{% url 'quiz_detail' lesson.quiz.id %}" class="btn btn-primary btn-lg">Continue to Quiz</a>
+                    {% elif next_lesson %}
+                        <a href="{% url 'lesson_detail' next_lesson.id %}" class="btn btn-primary btn-lg">Next Lesson</a>
+                    {% else %}
+                        <a href="{% url 'module_detail' lesson.module.id %}" class="btn btn-primary btn-lg">Back to Module</a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Module Progress</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for i in "123456"|make_list %}
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <span>Lesson {{ i }}</span>
+                                    {% if forloop.counter <= 3 %}
+                                        <span class="badge bg-success rounded-pill">Completed</span>
+                                    {% elif forloop.counter == 4 %}
+                                        <span class="badge bg-primary rounded-pill">Current</span>
+                                    {% else %}
+                                        <span class="badge bg-light text-dark rounded-pill">Not started</span>
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Vocabulary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <strong>Muraho</strong>
+                            <span>Hello</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <strong>Mwaramutse</strong>
+                            <span>Good morning</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <strong>Mwiriwe</strong>
+                            <span>Good afternoon</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <strong>Amakuru</strong>
+                            <span>How are you?</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong>Ni meza</strong>
+                            <span>I'm fine</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Navigation -->
+<section class="py-3">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            {% if prev_lesson %}
+                <a href="{% url 'lesson_detail' prev_lesson.id %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i> Previous Lesson
+                </a>
+            {% else %}
+                <a href="{% url 'module_detail' lesson.module.id %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i> Back to Module
+                </a>
+            {% endif %}
+            
+            {% if next_lesson %}
+                <a href="{% url 'lesson_detail' next_lesson.id %}" class="btn btn-outline-primary">
+                    Next Lesson <i class="bi bi-arrow-right"></i>
+                </a>
+            {% elif has_quiz %}
+                <a href="{% url 'quiz_detail' lesson.quiz.id %}" class="btn btn-primary">
+                    Take Quiz <i class="bi bi-arrow-right"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

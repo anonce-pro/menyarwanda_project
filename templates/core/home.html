@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Menyarwanda{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Welcome to Menyarwanda!</h1>
+                <div class="hero-text mb-4">
+                    <p>At Menyarwanda, we are dedicated to connecting people with the heart of Rwanda - its language, culture, history, and geography. Whether you are a Rwandan living abroad longing to reconnect with your roots, a visitor planning to explore Rwanda, or simply someone passionate about learning more about this beautiful country, you are in the right place.</p>
+                    <p>Our mission is to teach Kinyarwanda in an engaging and accessible way, while also offering insights into Rwanda's rich cultural heritage, historical journey, and stunning geographical landscapes.</p>
+                    <p class="fw-bold">Karibu! Welcome! Murakaza neza kuri Menyarwanda! Bienvenue!</p>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="{% url 'courses_list' %}" class="btn btn-primary cta-button me-md-2">Explore Courses</a>
+                    {% if not user.is_authenticated %}
+                        <a href="{% url 'register' %}" class="btn btn-outline-primary cta-button">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-0">
+                        <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Rwanda Landscape" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Discover Rwanda with Us</h2>
+            <p class="lead">Explore the different aspects of Rwanda through our comprehensive platform</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-translate"></i>
+                            <!-- Placeholder for icon -->
+                            <div style="font-size: 2.5rem; color: var(--primary-blue);">🗣️</div>
+                        </div>
+                        <h5 class="card-title">Language</h5>
+                        <p class="card-text">Learn Kinyarwanda through interactive lessons, quizzes, and audio examples.</p>
+                        <a href="{% url 'courses_list' %}" class="btn btn-outline-primary mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <!-- Placeholder for icon -->
+                            <div style="font-size: 2.5rem; color: var(--primary-blue);">🎭</div>
+                        </div>
+                        <h5 class="card-title">Culture</h5>
+                        <p class="card-text">Explore Rwanda's rich cultural heritage, traditions, and social practices.</p>
+                        <a href="{% url 'culture' %}" class="btn btn-outline-primary mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <!-- Placeholder for icon -->
+                            <div style="font-size: 2.5rem; color: var(--primary-blue);">🏔️</div>
+                        </div>
+                        <h5 class="card-title">Geography</h5>
+                        <p class="card-text">Discover the breathtaking landscapes and natural wonders of Rwanda.</p>
+                        <a href="{% url 'geography' %}" class="btn btn-outline-primary mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <!-- Placeholder for icon -->
+                            <div style="font-size: 2.5rem; color: var(--primary-blue);">📜</div>
+                        </div>
+                        <h5 class="card-title">History</h5>
+                        <p class="card-text">Learn about Rwanda's historical journey and significant milestones.</p>
+                        <a href="{% url 'history' %}" class="btn btn-outline-primary mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section-bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What Our Students Say</h2>
+            <p class="lead">Join thousands of satisfied learners on their journey to mastering Kinyarwanda</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <!-- Star rating -->
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"Menyarwanda has been an incredible resource for me to reconnect with my Rwandan heritage. The lessons are engaging and the cultural context makes learning meaningful."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="ms-3">
+                                <h6 class="mb-0">Jean-Pierre K.</h6>
+                                <small class="text-muted">Diaspora Student</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <!-- Star rating -->
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"As someone planning to visit Rwanda, this platform has been invaluable. I've learned basic Kinyarwanda and gained insights into the culture that will make my trip much more meaningful."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="ms-3">
+                                <h6 class="mb-0">Sarah M.</h6>
+                                <small class="text-muted">Tourist</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <!-- Star rating -->
+                            <span class="text-warning">★★★★★</span>
+                        </div>
+                        <p class="card-text">"The interactive quizzes and progress tracking have kept me motivated throughout my learning journey. I can now have basic conversations in Kinyarwanda with confidence!"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="ms-3">
+                                <h6 class="mb-0">David L.</h6>
+                                <small class="text-muted">Language Enthusiast</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-4">Ready to Start Your Journey?</h2>
+                <p class="lead mb-4">Join our community of learners and discover the beauty of Rwanda's language and culture.</p>
+                <a href="{% url 'subscription_page' %}" class="btn btn-primary btn-lg cta-button">Join Class Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
